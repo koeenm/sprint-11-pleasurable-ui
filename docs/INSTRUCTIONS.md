@@ -37,17 +37,17 @@ Er is veel werk aan de winkel deze sprint, maak afspraken om elke dag aan het pr
 2. De andere teamleden clonen de geforkte-repo, zo kun je makkelijk wijzigingen doorvoeren en ophalen
 3. Maak een _project board_ aan en koppel het aan de gezamenlijke _repository_ om bij te kunnen houden wie wat doet
 4. Plan voor de aankomende weken de reviews en noteer de planning in jullie _project board_.
-5. Bespreek regelmatig met je team welke werkzaamheden er zijn, **wie wat wanneer** gaat doen. Gebruik het project board om grip te houden op de planning, sleep taken naar _done_ als ze klaar zijn, schrijf nieuwe taken als dat nodig is. 
+5. Doe dagelijks een standup, bespreek met je team welke werkzaamheden er zijn en wie wat heeft gedaan.
+6. Gebruik het project board om grip te houden op de planning, sleep taken naar _done_ als ze klaar zijn, schrijf nieuwe taken als dat nodig is. 
 
 ### Materiaal voor samenwerken
 
-- [About Githhub Projects, quickstart en best practices](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects)
+- [About Github Projects, quickstart en best practices](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects)
+- [De Daily standup meeting: uitleg en tips](https://scrumguide.nl/daily-standup-meeting/)
 <!-- - [Making a pull-request](https://www.atlassian.com/git/tutorials/making-a-pull-request) (nb. wij gebruiken de feature-branch workflow) -->
-
 <!-- - [How to Collaborate on GitHub](https://code.tutsplus.com/tutorials/how-to-collaborate-on-github--net-34267) -->
 <!-- - [download het Team Canvas](https://github.com/fdnd-task/performance-matters-fast-website/blob/main/docs/Teamcanvas.pdf) -->
 <!-- - [Lees instructies over het gebruik van het Teamcanvas in de deeltaak uit sprint 1](https://github.com/fdnd-task/your-tribe-team-canvas) -->
-
 
 ## Ontwerpen
 In de ontwerpfase bepaal je met je team wat je gaat maken. 
@@ -73,31 +73,31 @@ Maak voor elke pagina, of onderdeel, een ontwerp op basis van de huisstijl. (Bij
 Maak code afspraken met je team over de Node-code, (semantische) HTML, gestructureerde CSS en conventies.
 Denk na over de HTML structuur, en het voorkomen van layout shifts, toepassen van perceived performance en loading hints aan de browser en het toepassen van responsive images. Maak afspraken over de volgorde van de CSS, van generiek-naar-specifiek. Bedenk een goede volgorde in de Node en de routing. Maak afspraken over het schrijven van comments. Etc ..
 
-### Bouwen
+## Bouwen
 In de bouwfase realiseer je de beslissingen uit de ontwerpfase. 
 Met het team werk je op 1 code base. 
 Zet je code [Mobile First](#mobile-first) op en werk met [Progressive Enhancement](#progressive-enhancement). 
 In je team werken jullie met de [feature branches](#feature-branches).
 
-#### Feature branches
+### Feature branches
 Met je team ga je allemaal aan features werken, jullie maken verschillende variaties van dezelfde features, of je verdeelt de werkzaamheden en werkt aan verschillende features. 
 
 Als je aan een feature gaat werken maak je eerst op GitHub een nieuwe _branch_ aan vanaf de main branch, vervolgens _pull_ je deze naar je lokale systeem. Je maakt regelmatig commits en implementeert de 'feature'. Als je klaar bent push je alles naar github en doe je vanaf de feature-branch een pull-request naar main. In het pull-request wordt jouw code bekeken, getest en goedgekeurd door jouw teamleden. 
 
 Pas de code afspraken toe en en doe een code-review met je team voordat je de code merged (integreert) met de main branch.
 
-#### Materiaal Feature branches
+### Materiaal Feature branches
 
 - [Using branches](https://www.atlassian.com/git/tutorials/using-branches)
 - [Feature Branch Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow)
 
-#### Mobile first
+### Mobile first
 Zorg dat je met je team Mobile First bouwt. Zet eerst de (semantische) HTML van de pagina's en/of onderdelen op. Pas daarna CSS toe om de huisstijl goed toe te passen. Voeg daarna media-queries of andere responsive CSS technieken toe voor M, L en of XL schermen. 
 
-#### Progressive Enhancement
+### Progressive Enhancement
 Bouw de website volgens het principe van Progressive Enhancement. Zorg dat eerst de _functional_ en _reliable_ laag het goed doet, daarna de _usable_ laag, voordat je gaat experimenteren met de _pleasurable UI_. 
 
-### Integreren
+## Integreren
 In de integratiefase voer je de aanpassingen door zodat iedereen ze kan zien en er op verder kan bouwen. 
 
 1. Integreer jouw code naar de gezamenlijke repo
@@ -105,12 +105,12 @@ In de integratiefase voer je de aanpassingen door zodat iedereen ze kan zien en 
 3. Handel het *pull-request* af, zorg voor een helder gedocumenteerd *pull-request* door bij de afhandeling relevante berichten te typen. 
 4. Zorg dat je teamgenoten de nieuwe code integreren
 
-#### Materiaal
+### Materiaal Integreren
 
 - [Creating a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
 - [Feature Branch: A Quick Walk Through Git Workflow](https://blog.mergify.com/feature-branch-a-quick-walk-through-git-workflow/)
 
-### Testen
+## Testen
 In de testfase controleer je of jouw aanpassingen werken zoals bedoeld. 
 
 ## Criteria
