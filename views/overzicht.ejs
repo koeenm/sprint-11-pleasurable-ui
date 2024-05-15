@@ -1,0 +1,34 @@
+<!-- Hier word de header geinclude -->
+<%- include('./partials/head') %>
+
+<main>
+  <div class="overzicht__button--container">
+    <a href="/service-aanmelden" class="overzicht__button">Zelf iets plaatsen...</a>
+  </div>
+  <ul class="overzicht__container">
+    <% // Sorteren van advertenties op oud naar nieuw (Hoogste ID tot laagste ID)
+    services.sort((a, b) => b.id - a.id); services.forEach(function(service) {
+    %>
+    <li class="overzicht__service">
+      <div class="loading"></div>
+      <a href="/service/<%= service.slug %>">
+        <form action="/like" method="POST" class="overzicht__like--form">
+          <label class="heart-checkbox" for="<%= service.id %>-like">
+            <input type="checkbox" name="like" id="<%= service.id %>-like" value="<%= service.id %>" />
+            <i class="fas fa-heart"></i>
+            <span><%= service.likes %></span>
+          </label>
+        </form>
+        <img src="https://fdnd-agency.directus.app/assets/<%= service.image %>"/>
+        <section class="overzicht__service--tekst">
+          <h2><%= service.title %></h2>
+          <p><%= service.short_description %></p>
+        </section>
+      </a>
+    </li>
+    <% }); %>
+  </ul>
+</main>
+
+<!-- Hier word de foot geinclude -->
+<%- include('./partials/foot') %>

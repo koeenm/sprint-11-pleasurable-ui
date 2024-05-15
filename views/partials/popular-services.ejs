@@ -1,0 +1,18 @@
+<section class="main__uitgelicht">
+  <h2>Populairste initiatieven</h2>
+  <ul class="main__index--services">
+      <% 
+      // Sort services based op likes, aflopend, en pak alleen de eerste 3
+      services.sort((a, b) => b.likes - a.likes).slice(0, 3).forEach((service) => { 
+      %>
+      <li class="main__index--service">
+          <img loading="lazy" src="https://fdnd-agency.directus.app/assets/<%= service.image %>" alt="">
+          <section class="main__index--service-txt">
+              <h3><%= service.title %></h3>
+              <p><%= service.short_description %></p>
+              <a href="/service/<%= service.slug %>">Bekijk dit initiatief ➜</a>
+          </section>
+      </li>
+      <% }); %>
+  </ul>
+</section>

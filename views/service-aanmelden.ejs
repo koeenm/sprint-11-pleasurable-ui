@@ -1,0 +1,87 @@
+<!-- Hier word de header geinclude -->
+<%- include('./partials/head') %>
+
+<main class="main__aanmelden">
+
+  <section class="main__aanmelden--intro">
+    <h1>Plaats een initiatief</h1>
+    <p>Wil je graag zelf je steentje bijdragen? Vul dan hier onder de gegevens in en plaats je eigen initiatief.</p>
+  </section>
+
+  <form action="/service-aanmelden" method="POST">
+
+    <!-- Contact Gegevens -->
+   <fieldset class="flex">
+      <legend>Contact gegevens</legend>
+      <p class="flex column">
+        <label for="name">Voornaam<span>*</span></label>
+        <input type="text" id="name" name="name" required>
+      </p>
+      <p class="flex column">
+        <label for="surname">Achternaam<span>*</span></label>
+        <input type="text" id="surname" name="surname" required>
+      </p>
+      <p>
+        <label for="email">E-mail<span>*</span></label>
+        <input type="text" id="email" name="email" required>
+      </p>
+    </fieldset>
+  
+    <!-- Initiatief gegevens -->
+    <fieldset>
+      <legend>Initiatief gegevens</legend>
+      <div class="radio-buttons">
+        <p>
+          <input type="radio" id="vraag" name="contact" value="vraag" checked/>
+          <label for="type">Vraag</label>
+        </p>
+        <p>
+          <input type="radio" id="aanbod" name="contact" value="aanbod"/>
+          <label for="type">Aanbod</label>
+        </p>
+      </div>
+    
+      <label for="title">Titel<span>*</span></label>
+      <input type="text" id="title" name="title" required>
+      
+      <label for="short_description">Initiatief in 3 zinnen<span>*</span></label>
+      <input type="text" id="short_description" name="short_description" required>
+      
+      <label for="long_description">Beschrijving<span>*</span></label>
+      <input type="text" id="long_description" name="long_description" required>
+    
+      <label for="location">Locatie</label>
+      <input type="text" id="location" name="location">
+    
+      <label for="neighbourhood">Buurt<span>*</span></label>
+      <select name="neighbourhood" id="neighbourhood" name="neighbourhood" required>
+        <option value="Slotervaart">Slotervaart</option>
+        <option value="Kinkerbuurt">Kinkerbuurt</option>
+        <option value="De Baarsjes">De Baarsjes</option>
+        <option value="Westerpark">Westerpark</option>
+      </select>
+    
+      <label for="start_date">Start datum</label>
+      <input type="date" id="start_date" name="start_date" required>
+      <label for="end_date">Eind datum</label>
+      <input type="date" id="end_date" name="end_date" required>
+    
+      <label for="time">Start tijd</label>
+      <input type="time" id="time" name="time" required>
+      <label for="end_time">Eind tijd</label>
+      <input type="time" id="end_time" name="end_time" required>
+    
+      <p class="flex column upload">
+        <label for="image">Foto uploaden</label>
+        <input type="file" id="image" name="image" accept="image/png, image/jpg" required>
+      </p>
+  
+      <input type="submit">
+    </fieldset>
+  
+  </form>
+  
+</main>
+
+<!-- Hier word de foot geinclude -->
+<%- include('./partials/foot') %>

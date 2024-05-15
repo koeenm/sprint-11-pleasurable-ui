@@ -1,0 +1,559 @@
+/* ------------- Root & Font ------------- */
+
+:root {
+  --base--white: #fff;
+  --base--grey-97: #f8f8f8;
+  --base--grey-62: #aaa;
+  --base--grey-19: #4a4a4a;
+  --base--black: #202020;
+
+  --primary--green-accent: #41bd66;
+  --secondary--green-accent: #a0d7b0;
+  --light--green-accent: #e3ebdd;
+
+  --primary-red-accent: #c32222;
+  --secondary-red-accent: #fa7d7d;
+}
+
+/* ------------- Loading Class ------------- */
+
+.loading {
+  display: none;
+  position: absolute;
+  top: 40%;
+  left: 38%;
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid;
+  border-color: #000 #0000;
+  animation: l1 1s infinite;
+}
+
+@keyframes l1 {to{transform: rotate(.5turn)}}
+
+/* -------------- Service Detail Pagina -------------- */
+
+.service__main {
+  padding: 1em;
+}
+
+.service__info {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 8px;
+  border: 2px solid var(--base--grey-97);
+  background-color: var(--base--white);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.service__info h1 {
+  font-size: 1.2em;
+  margin-bottom: 0;
+}
+
+.service__info h2 {
+  font-size: 1em;
+  color: var(--base--grey-62);
+  text-transform: uppercase;
+  margin: 0;
+  margin-top: 0.2em;
+  display: flex;
+}
+
+.service__info button {
+  border: none;
+  color: var(--base--white);
+  background-color: var(--primary--green-accent);
+  padding: 0.8em;
+  margin: 0.8em 0;
+  font-size: 1em;
+  border-radius: 8px;
+  font-family: 'Medium';
+}
+
+.service__image {
+  width: 18em;
+  height: 12em;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.service__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.service__list--item {
+  height: 24em;
+  margin: 2em 0;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: 2px solid var(--base--grey-97);
+  background-color: var(--base--white);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.service__list--item img {
+  width: 8em;
+}
+
+.service__list--item h3 {
+  margin: 0.4em;
+  font-size: 1.6em;
+  color: var(--primary--green-accent);
+}
+
+.service__list--item h4 {
+  margin: 0.4em;
+  font-size: 1.2em;
+}
+
+.service__list--item p {
+  font-size: 1.2em;
+  margin: 0.4em;
+}
+
+.service__dates {
+  min-width: 10em;
+}
+
+iframe {
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 1em;
+}
+
+/* -------------- Service Aanmelden -------------- */
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.column {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+.main__aanmelden--intro{
+  margin: 0 auto;
+  width: 18em;
+}
+
+.main__aanmelden--intro h1 {
+  font-size: 1.8em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: min-content;
+  margin: 0 auto;
+}
+
+label {
+  font-size: 1.2em;
+}
+
+input {
+  border: 2px solid var(--base--grey-62);
+  border-radius: 8px;
+  width: 20em;
+  padding: 0.6em;
+  margin: 1em 0;
+  font-family: 'Medium';
+  -webkit-appearance: none;
+  -moz-appearance:    none;
+  appearance:         none;
+}
+
+input:focus-visible {
+  border: 2px solid var(--primary--green-accent);
+  outline: none;
+}
+
+input:valid:not(input[type="submit"], #location) {
+  border-color: var(--primary--green-accent);
+  background: var(--light--green-accent);
+}
+
+input:required:focus:invalid {
+  border-color: var(--primary-red-accent);
+  background: var(--secondary-red-accent);
+}
+
+select {
+  border: 2px solid var(--base--grey-62);
+  border-radius: 8px;
+  width: 18rem;
+  padding: 0.6em;
+  font-family: 'Medium';
+  -webkit-appearance: none;
+  -moz-appearance:    none;
+  appearance:         none;
+}
+
+select:focus-visible {
+  border: 2px solid var(--primary--green-accent);
+  outline: none;
+}
+
+.radio-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.radio-buttons p {
+  margin-top: 0;
+  margin-right: 1.8em;
+  font-size: 1.2em;
+}
+
+#short__description {
+  height: 6em;
+}
+
+#long__description {
+  height: 16em;
+}
+
+#image {
+  background-color: var(--base--grey-97);
+  border: 1px solid var(--base--grey-62);
+  border-radius: 8px;
+  height: 40px;
+  width: 16.6em;
+  font-family: 'Medium';
+  font-size: 1em;
+}
+
+#image::file-selector-button{
+  border: none;
+  border-radius: 8px;
+  color: var(--base--white);
+  background-color: var(--primary--green-accent);
+  border: none;
+  height: 40px;
+  cursor: pointer;
+  transition: all .25s ease-in;
+  cursor: pointer;
+}
+
+#image::file-selector-button:hover{
+  background-color: var(--base--white);
+  color: var(--primary--green-accent);
+  transition: all .25s ease-in;
+}
+
+input[type="submit"] {
+  background-color: var(--primary--green-accent);
+  border: 2px solid var(--primary--green-accent);
+  color: var(--base--white);
+  font-size: 1.2em;
+  width: 18rem;
+  margin: 1em 0 2em 0;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: var(--base--black);
+}
+
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--base--grey-62);
+    border-radius: 100%;
+    background: var(--base--white);
+}
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 12px;
+    height: 12px;
+    background: var(--primary--green-accent);
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+[type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+[type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+.service__aanmelden {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 20em;
+  margin: 4em auto 16em auto;
+  text-align: center;
+}
+
+.service__aanmelden img {
+  max-height: 16em;
+  filter: hue-rotate(290deg);
+  z-index: -1;
+}
+
+.service__aanmelden h2 {
+  font-size: 2em;
+}
+
+.service__aanmelden a {
+  color: var(--primary--green-accent);
+  font-size: 1.6em;
+}
+
+.service__aanmelden a:hover {
+  text-decoration: underline;
+}
+
+fieldset {
+  margin: 2em 0;
+  border: none;
+}
+
+fieldset:last-of-type {
+  margin: 1em 0;
+}
+
+legend {
+  font-size: 1.8em;
+}
+
+/* -------------- Media Queries -------------- */
+
+@media screen and (min-width: 768px) {
+
+  form label {
+    font-size: 1.6em;
+  }
+
+  legend {
+    font-size: 2.6em;
+  }
+
+  input {
+    width: 30em;
+    padding: 1em;
+    font-size: 1.1em;
+  }
+
+  select {
+    font-size: 1.2em;
+    width: 29.6em;
+    margin: 1em 0;
+  }
+
+  fieldset input[type="submit"] {
+    width: 22em;
+    margin: 2em auto 3em auto;
+    font-size: 1.6em;
+  }
+
+  .main__aanmelden--intro {
+    width: 35em;
+  }
+
+  .main__aanmelden--intro h1 {
+    font-size: 2.6em;
+  }
+
+  .main__aanmelden--intro p {
+    font-size: 1.4em;
+  }
+
+  #image {
+    width: 33em;
+  }
+
+  .service__aanmelden {
+    width: 40em;
+    margin: 10em auto 20em auto;
+  }
+  
+  .service__aanmelden img {
+    max-height: 24em;
+  }
+  
+  .service__aanmelden h2 {
+    font-size: 3em;
+  }
+  
+  .service__aanmelden a {
+    font-size: 2em;
+  }
+
+  .radio-buttons {
+    margin: 2em 0;
+  }
+
+  .service__list--item {
+    max-width: 30em;
+    margin: 2em auto;
+  }
+
+  .service__info {
+    max-width: 30em;
+    margin: 2em auto;
+  }
+
+  .service__info img {
+    height: 20em;
+    min-width: 30em;
+  }
+
+  .service__info h1 {
+    font-size: 1.4em;
+  }
+}
+
+@media screen and (min-width: 1099px) {
+
+  input {
+    width: 50em;
+  }
+
+  input[type="submit"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  select {
+    width: 47.8em;
+  }
+
+  .main__aanmelden--intro {
+    width: 56.6em;
+  }
+
+  .main__aanmelden--intro h1 {
+    font-size: 2.6em;
+  }
+
+  .main__aanmelden--intro p {
+    font-size: 1.4em;
+  }
+
+  #image {
+    width: 33em;
+  }
+
+  .service__aanmelden {
+    width: 50em;
+    margin: 2em auto 20em auto;
+  }
+  
+  .service__aanmelden img {
+    max-height: 24em;
+  }
+
+  .radio-buttons {
+    justify-content: flex-start;
+  }
+
+  .service__list--item {
+    max-width: 40em;
+    margin: 2em auto;
+  }
+
+  .service__info {
+    max-width: 40em;
+    margin: 2em auto;
+  }
+
+  .service__info img {
+    height: 20em;
+    min-width: 40em;
+  }
+}
+
+@media screen and (min-width: 1599px) {
+  .service__main {
+    max-width: 90em;
+    margin: 0 auto;
+  }
+
+  .service__info {
+    flex-direction: row;
+    grid-area: main;
+  }
+
+  .service__list--item {
+    grid-area: li;
+  }
+
+  .service__main {
+    display: grid;
+    grid-template-areas: 
+    "main"
+    "li";
+  }
+
+  .serivce__list {
+    display: flex;
+  }
+
+  .service__list--item {
+    min-width: 24em;
+  }
+
+  .service__info {
+    min-width: 84em;
+    gap: 4em;
+  }
+
+  .service__info img {
+    min-width: 32em;
+    min-height: 24em;
+  }
+}

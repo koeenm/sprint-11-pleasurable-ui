@@ -1,0 +1,40 @@
+<!-- Hier word de header geinclude -->
+<%- include('./partials/head') %>
+
+<main class="service__main">
+
+    <section class="service__info">
+        <img class="service__image" src="https://fdnd-agency.directus.app/assets/<%= service.image %>">
+        <section>
+            <h1><%= service.title %></h1>
+            <h2><%= service.categories %></h2>
+            <%- service.long_description %>
+            <button>Aanmelden &#10140;</button>
+        </section>
+    </section>
+
+    <ul class="serivce__list">
+        <li class="service__list--item">
+            <img src="/assets/calendar.svg" alt="">
+            <h3>Wanneeer</h3>
+            <p>12 september 2024</p>
+            <p>12:00 - 17:00</p>
+        </li>
+        <li class="service__list--item">
+            <img src="/assets/location.svg" alt="">
+            <h3>Locatie</h3>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9744.846269651585!2d4.858303841006656!3d52.36658365420297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c609e01d4b189b%3A0xf3bfaa521febef29!2sDe%20Hallen%20Amsterdam!5e0!3m2!1snl!2snl!4v1712135874795!5m2!1snl!2snl" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </li>
+        <li class="service__list--item">
+            <img src="/assets/contact-person.svg" alt="">
+            <h3>Contactgegevens</h3>
+            <p>Johanna Doe</p>
+            <p>johanna.doe@gmail.com</p>
+            <p>06 12 34 56 78</p>
+        </li>
+    </ul>
+
+</main>
+
+<!-- Hier word de foot geinclude -->
+<%- include('./partials/foot') %>

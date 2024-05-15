@@ -1,0 +1,29 @@
+<section class="main__uitgelicht">
+  <h2>Onze keus</h2>
+  <ul class="main__index--services">
+      <li class="main__index--service">
+          <img loading="lazy" src="https://fdnd-agency.directus.app/assets/<%= services[1].image %>" alt="">
+          <section class="main__index--service-txt">
+              <h3><%= services[1].title %></h3>
+              <p><%= services[1].short_description %></p>
+              <a href="/service/<%= services[1].slug %>">Bekijk dit initiatief ➜</a>
+          </section>
+      </li>
+      <li class="main__index--service">
+          <img loading="lazy" src="https://fdnd-agency.directus.app/assets/<%= services[2].image %>" alt="">
+          <section class="main__index--service-txt">
+              <h3><%= services[2].title %></h3>
+              <p><%= services[2].short_description %></p>
+              <a href="/service/<%= services[2].slug %>">Bekijk dit initiatief ➜</a>
+          </section>
+      </li>
+      <li class="main__index--service">
+          <img loading="lazy" src="https://fdnd-agency.directus.app/assets/<%= services[3].image %>" alt="">
+          <section class="main__index--service-txt">
+              <h3><%= services[3].title %></h3>
+              <p><%= services[3].short_description %></p>
+              <a href="/service/<%= services[3].slug %>">Bekijk dit initiatief ➜</a>
+          </section>
+      </li>
+  </ul>
+</section>
