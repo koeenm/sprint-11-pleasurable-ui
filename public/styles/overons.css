@@ -1,0 +1,35 @@
+/* ------------- Root & Font ------------- */
+
+:root {
+  --base--white: #fff;
+  --base--grey-97: #f8f8f8;
+  --base--grey-62: #aaa;
+  --base--grey-19: #4a4a4a;
+  --base--black: #202020;
+
+  --primary--green-accent: #41bd66;
+  --secondary--green-accent: #a0d7b0;
+  --light--green-accent: #e3ebdd;
+}
+
+/* ------------- About ------------- */
+
+
+
+/* ------------- Media Queries ------------- */
+
+@media screen and (min-width: 768px) {
+
+}
+
+@media screen and (min-width: 1099px) {
+
+}
+
+@media screen and (min-width: 1599px) {
+
+}
+
+@media screen and (min-width: 1799px) {
+
+}

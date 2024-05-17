@@ -42,6 +42,16 @@ fetchData().then((allAdvertisementsData) => {
     response.render("index", { services: allAdvertisementsData });
   });
 
+  // GET-route voor de contact pagina
+  app.get("/contact", function (request, response) {
+    response.render("contact", { services: allAdvertisementsData, });
+  });
+
+  // GET-route voor de over ons pagina
+  app.get("/over-ons", function (request, response) {
+    response.render("over-ons", { services: allAdvertisementsData, });
+  });
+
   // GET-route voor de FAQ pagina
   app.get("/faq", function (request, response) {
     response.render("faq", { services: allAdvertisementsData, });

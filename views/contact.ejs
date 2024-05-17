@@ -1,0 +1,41 @@
+<!-- Hier word de header geinclude -->
+<%- include('./partials/head') %>
+
+<main class="contact__container">
+
+  <section class="contact__container--left">
+    <div class="contact__text">
+      <h2>Contacteer ons</h2>
+      <p>Heb je je vraag niet kunnen vinden bij de <a href="/faq">veelgestelde vragen</a>? Neem dan hier contact met ons op.</p>
+    </div>
+    <img src="/assets/contact.svg" alt="Illustration of contact methods such as email, phone or a letter.">
+  </section>
+  
+  <section class="contact__container--right">
+    <form class="contact__form">
+      <fieldset>
+        <legend>Contact</legend>
+        <p>
+          <label for="fullname">Naam<span>*</span></label>
+          <input type="text" id="fullname" name="fullsurname" required>
+        </p>
+        <p>
+          <label for="email">E-mail<span>*</span></label>
+          <input type="text" id="email" name="email" required>
+        </p>
+        <p>
+          <label for="phone">Telefoonnummer<span>*</span></label>
+          <input type="text" id="phone" name="phone" required>
+        </p>
+        <label for="message">Beschrijving<span>*</span></label>
+        <input type="text" id="message" name="message" required>
+
+        <input type="submit" value="Verstuur">
+      </fieldset>
+    </form>
+  </section>
+
+</main>
+
+<!-- Hier word de foot geinclude -->
+<%- include('./partials/foot') %>
