@@ -1,8 +1,8 @@
 // Importeer het npm pakket express uit de node_modules map
-import express from 'express'
+import express from "express";
 
 // Importeer de zelfgemaakte functie fetchJson uit de ./helpers map
-import fetchJson from './helpers/fetch-json.js'
+import fetchJson from "./helpers/fetch-json.js";
 
 // Importeer slugify voor leesbare URLs met slug
 import slugify from "slugify";
@@ -11,18 +11,18 @@ import slugify from "slugify";
 const baseUrl = "https://fdnd-agency.directus.app";
 
 // Maak een nieuwe express app aan
-const app = express()
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Stel ejs in als template engine
-app.set('view engine', 'ejs')
+app.set("view engine", "ejs");
 
 // Stel de map met ejs templates in
-app.set('views', './views')
+app.set("views", "./views");
 
 // Gebruik de map 'public' voor statische resources, zoals stylesheets, afbeeldingen en client-side JavaScript
-app.use(express.static('public'))
+app.use(express.static("public"));
 
 // Fetch de data van de API
 const fetchFromApi = (endpoint) => {
@@ -36,7 +36,6 @@ const fetchData = () => {
 
 // Data ophalen van de API
 fetchData().then((allAdvertisementsData) => {
-
   // GET-route voor de indexpagina
   app.get("/", function (request, response) {
     response.render("index", { services: allAdvertisementsData });
@@ -44,17 +43,17 @@ fetchData().then((allAdvertisementsData) => {
 
   // GET-route voor de contact pagina
   app.get("/contact", function (request, response) {
-    response.render("contact", { services: allAdvertisementsData, });
+    response.render("contact", { services: allAdvertisementsData });
   });
 
   // GET-route voor de over ons pagina
   app.get("/over-ons", function (request, response) {
-    response.render("over-ons", { services: allAdvertisementsData, });
+    response.render("over-ons", { services: allAdvertisementsData });
   });
 
   // GET-route voor de FAQ pagina
   app.get("/faq", function (request, response) {
-    response.render("faq", { services: allAdvertisementsData, });
+    response.render("faq", { services: allAdvertisementsData });
   });
 
   // GET-route voor de overzichtspagina
@@ -88,7 +87,9 @@ fetchData().then((allAdvertisementsData) => {
 
   // GET-route voor de pagina om een service aanmelding succes weer te geven
   app.get("/service-aanmelden-gelukt", function (request, response) {
-    response.render("service-aanmelden-gelukt", { services: allAdvertisementsData });
+    response.render("service-aanmelden-gelukt", {
+      services: allAdvertisementsData,
+    });
   });
 
   // POST-route om formuliergegevens te verwerken
@@ -118,21 +119,25 @@ fetchData().then((allAdvertisementsData) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newAdvertisement),
-    }).then((responseFromAPI) => {
-      console.log("Response from API:", responseFromAPI);
+    })
+      .then((responseFromAPI) => {
+        console.log("Response from API:", responseFromAPI);
 
-      // Bijwerken van de gegevens vanuit de API
-      fetchData().then((updatedData) => {
-        allAdvertisementsData = updatedData;
-        response.redirect("/service-aanmelden-gelukt");
-      }).catch((error) => {
-        console.error("Error fetching data from API:", error);
+        // Bijwerken van de gegevens vanuit de API
+        fetchData()
+          .then((updatedData) => {
+            allAdvertisementsData = updatedData;
+            response.redirect("/service-aanmelden-gelukt");
+          })
+          .catch((error) => {
+            console.error("Error fetching data from API:", error);
+            response.status(500).send("Internal Server Error");
+          });
+      })
+      .catch((error) => {
+        console.error("Error while posting data to API:", error);
         response.status(500).send("Internal Server Error");
       });
-    }).catch((error) => {
-      console.error("Error while posting data to API:", error);
-      response.status(500).send("Internal Server Error");
-    });
   });
 
   // POST-route voor het liken van een service
@@ -142,10 +147,10 @@ fetchData().then((allAdvertisementsData) => {
     const service = allAdvertisementsData.find(
       (service) => service.id === parseInt(likeId)
     );
-    if (!service) { 
+    if (!service) {
       console.log("Service niet gevonden voor ID:", likeId);
       response.status(404).send("Service niet gevonden");
-      return
+      return;
     }
 
     // Geef aan de server door of het een like of unlike is
@@ -159,13 +164,15 @@ fetchData().then((allAdvertisementsData) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ likes: service.likes }),
-    }).then(() => {
-      console.log("Aantal likes bijgewerkt voor service:", service);
-      response.status(202).send();
-    }).catch((error) => {
-      console.error("Error patching likes in Directus API:", error);
-      response.status(500).send(); // TODO: send correct body
-    });
+    })
+      .then(() => {
+        console.log("Aantal likes bijgewerkt voor service:", service);
+        response.status(202).send();
+      })
+      .catch((error) => {
+        console.error("Error patching likes in Directus API:", error);
+        response.status(500).send(); // TODO: send correct body
+      });
   });
 
   // Poort instellen waarop Express moet luisteren
