@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ like_id: serviceId, isLike: isLike }), // Voeg isLike parameter toe
+        body: JSON.stringify({ like_id: serviceId, isLike: isLike }),
       })
         .then(function (response) {
           if (!response.ok) {
@@ -77,8 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
             "Oeps! Er is iets mis gegaan bij het liken van dit initiatief. Herlaad de pagina en probeer het opnieuw."
           );
         });
-
-      console.log("jippie");
     });
   });
 
