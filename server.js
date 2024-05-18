@@ -137,20 +137,23 @@ fetchData().then((allAdvertisementsData) => {
 
   // POST-route voor het liken van een service
   app.post("/like", function (request, response) {
-    const { like_id } = request.body;
-    console.log("Like verzoek voor service met ID:", like_id);
+    const { like_id: likeId, isLike } = request.body; // Renamed like_id to likeId
+    console.log("Like verzoek voor service met ID:", likeId);
     const service = allAdvertisementsData.find(
-      (service) => service.id === parseInt(like_id)
+      (service) => service.id === parseInt(likeId)
     );
     if (!service) { 
-      console.log("Service niet gevonden voor ID:", like_id);
+      console.log("Service niet gevonden voor ID:", likeId);
       response.status(404).send("Service niet gevonden");
       return
     }
 
-    service.likes = (service.likes || 0) + 1;
+    // Geef aan de server door of het een like of unlike is
+    const likeIncrement = isLike ? 1 : -1;
+    service.likes = (service.likes || 0) + likeIncrement;
+
     // Aantal likes bijwerken in de Directus API
-    fetchJson(baseUrl + `/items/dh_services/${like_id}`, {
+    fetchJson(baseUrl + `/items/dh_services/${likeId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -163,7 +166,7 @@ fetchData().then((allAdvertisementsData) => {
       console.error("Error patching likes in Directus API:", error);
       response.status(500).send(); // TODO: send correct body
     });
-});
+  });
 
   // Poort instellen waarop Express moet luisteren
   app.set("port", process.env.PORT || 8000);

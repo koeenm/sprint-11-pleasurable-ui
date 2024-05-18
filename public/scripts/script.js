@@ -12,10 +12,12 @@ document.addEventListener("DOMContentLoaded", function () {
   loadingElements.forEach(function (loadingElement) {
     loadingElement.style.display = "none";
   });
+
   // Voeg een eventListener toe voor alle checkboxes
   likeCheckboxes.forEach(function (checkbox) {
     checkbox.addEventListener("change", function () {
       const serviceId = this.value;
+      const isLike = this.checked;
       const likeCount = this.parentElement.querySelector("span");
       const heartIcon = this.parentElement.querySelector("i.fas.fa-heart");
       const spinner = this.parentElement.querySelector(".spinner");
@@ -42,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ like_id: serviceId }),
+        body: JSON.stringify({ like_id: serviceId, isLike: isLike }), // Voeg isLike parameter toe
       }).then(function (response) {
         if (!response.ok) {
           throw new Error("Failed to update likes count in Directus API");
