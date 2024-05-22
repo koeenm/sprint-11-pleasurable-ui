@@ -29,12 +29,13 @@
     </li>
     <% }); %>
   </ul>
-  <div class="pagination">
+  <div class="overzicht__pagination">
     <% if (hasPrevPage) { %>
-      <a href="/overzicht?page=<%= currentPage - 1 %>">Previous</a>
+      <a href="/overzicht?page=<%= currentPage - 1 %>">Vorige</a>
     <% } %>
+    <span>Pagina <%= currentPage %></span>
     <% if (hasNextPage) { %>
-      <a href="/overzicht?page=<%= currentPage + 1 %>">Next</a>
+      <a href="/overzicht?page=<%= currentPage + 1 %>">Volgende</a>
     <% } %>
   </div>
 </main>
