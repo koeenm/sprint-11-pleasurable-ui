@@ -134,6 +134,7 @@
   justify-content: center;
   align-items: center;
   padding: 2em;
+  padding-top: 0;
 }
 
 .overzicht__pagination span {
@@ -142,6 +143,40 @@
 
 .overzicht__pagination a {
   margin: 1em;
+}
+
+.overzicht__pagination a.disabled {
+  color: var(--base--grey-62);
+  pointer-events: none;
+}
+
+/* -------------- Fade Animation -------------- */
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+.fade-out {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 /* -------------- Media Queries -------------- */
@@ -155,12 +190,20 @@
     font-size: 1.2em;
     margin: 2em auto;
   }
+
+  .overzicht__pagination {
+    font-size: 1.2em;
+  }
 }
 
 @media screen and (min-width: 1099px) {
   .overzicht__container {
     max-width: 68em;
     justify-content: space-between;
+  }
+
+  .overzicht__pagination {
+    font-size: 1.4em;
   }
 }
 

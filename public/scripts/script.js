@@ -80,8 +80,66 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Laat elk like formulier/button zien
-  likeForm.forEach(function (likeForm) {
-    likeForm.style.display = "block";
-  });
+  // Selecteer de pagination links
+  const prevPageLink = document.getElementById("prevPage");
+  const nextPageLink = document.getElementById("nextPage");
+
+  // Add event listenener click aan de pagination links
+  prevPageLink.addEventListener("click", handlePaginationClick);
+  nextPageLink.addEventListener("click", handlePaginationClick);
+
+  // Functie voor het handelen van de pagination dinges
+  function handlePaginationClick(event) {
+    event.preventDefault(); // Prevent default! WOOP!
+
+    // Haal de url op van de paginatie link
+    const url = this.href;
+
+    // Haal de inhoud van de gevraagde pagina op
+    fetch(url)
+      .then((response) => response.text())
+      .then((html) => {
+        // Maak een nieuw element aan om de inhoud van de gevraagde pagina te houden
+        const tempElement = document.createElement("div");
+        tempElement.innerHTML = html;
+
+        // Selecteer alleen de inhoud binnen het <ul> element van de nieuwe pagina
+        const newContent = tempElement.querySelector("main > ul").innerHTML;
+
+        // Update de content op de pagina met de gevraagde HTML
+        document.querySelector("main > ul").innerHTML = newContent;
+
+        // Update de pagination links
+        const newPrevPageLink = tempElement.querySelector("#prevPage");
+        const newNextPageLink = tempElement.querySelector("#nextPage");
+
+        // Update de class van de vorige link
+        prevPageLink.classList.toggle(
+          "disabled",
+          newPrevPageLink.classList.contains("disabled")
+        );
+
+        // Update de class van de volgende link
+        nextPageLink.classList.toggle(
+          "disabled",
+          newNextPageLink.classList.contains("disabled")
+        );
+
+        // Update the page number
+        const currentPageElement = tempElement.querySelector(
+          ".overzicht__pagination span"
+        );
+        const currentPage = currentPageElement.textContent;
+        document.querySelector(".overzicht__pagination span").textContent =
+          currentPage;
+
+        // Update de URL
+        history.pushState(null, null, url);
+
+        // Zorg ervoor dat de event listeners opnieuw worden toegevoegd na het vervangen van de inhoud
+        prevPageLink.addEventListener("click", handlePaginationClick);
+        nextPageLink.addEventListener("click", handlePaginationClick);
+      })
+      .catch((error) => console.error("Error fetching page:", error));
+  }
 });

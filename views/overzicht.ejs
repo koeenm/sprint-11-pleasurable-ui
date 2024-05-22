@@ -9,7 +9,7 @@
     <% // Sorteren van advertenties op oud naar nieuw (Hoogste ID tot laagste ID)
     services.sort((a, b) => b.id - a.id); services.forEach(function(service) {
     %>
-    <li class="overzicht__service">
+    <li class="overzicht__service fade-in">
       <div class="loading"></div>
       <a href="/service/<%= service.slug %>">
         <form action="/like" method="POST" class="overzicht__like--form">
@@ -30,13 +30,9 @@
     <% }); %>
   </ul>
   <div class="overzicht__pagination">
-    <% if (hasPrevPage) { %>
-      <a href="/overzicht?page=<%= currentPage - 1 %>">Vorige</a>
-    <% } %>
+    <a id="prevPage" class="<%= hasPrevPage ? '' : 'disabled' %>" href="/overzicht?page=<%= currentPage - 1 %>">Vorige</a>
     <span>Pagina <%= currentPage %></span>
-    <% if (hasNextPage) { %>
-      <a href="/overzicht?page=<%= currentPage + 1 %>">Volgende</a>
-    <% } %>
+    <a id="nextPage" class="<%= hasNextPage ? '' : 'disabled' %>" href="/overzicht?page=<%= currentPage + 1 %>">Volgende</a>
   </div>
 </main>
 
