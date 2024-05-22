@@ -6,7 +6,7 @@
       services.sort((a, b) => b.id - a.id).slice(0, 3).forEach((service) => { 
       %>
       <li class="main__index--service">
-          <img loading="lazy" src="https://fdnd-agency.directus.app/assets/<%= service.image %>" alt="">
+        <img loading="lazy" src="<%= service.image ? 'https://fdnd-agency.directus.app/assets/' + service.image : '/assets/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg' %>" alt="Image">
           <section class="main__index--service-txt">
               <h3><%= service.title %></h3>
               <p><%= service.short_description %></p>
