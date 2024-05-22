@@ -29,6 +29,12 @@ const fetchFromApi = (endpoint) => {
   return fetchJson(baseUrl + endpoint).then((response) => response.data);
 };
 
+// Fetch de data van de API van dh_services met paginering
+const fetchPaginatedData = (page = 1, limit = 6) => {
+  const offset = (page - 1) * limit;
+  return fetchFromApi(`/items/dh_services?limit=${limit}&offset=${offset}`);
+};
+
 // Fetch de data van de API van dh_services
 const fetchData = () => {
   return fetchFromApi("/items/dh_services");
@@ -56,9 +62,19 @@ fetchData().then((allAdvertisementsData) => {
     response.render("faq", { services: allAdvertisementsData });
   });
 
-  // GET-route voor de overzichtspagina
+  // GET-route voor de overzichtspagina met pagination
   app.get("/overzicht", function (request, response) {
-    response.render("overzicht", { services: allAdvertisementsData });
+    const page = parseInt(request.query.page) || 1;
+    const limit = 6; // Aantal items per pagina
+
+    fetchPaginatedData(page, limit).then((paginatedData) => {
+      response.render("overzicht", {
+        services: paginatedData,
+        currentPage: page,
+        hasNextPage: paginatedData.length === limit,
+        hasPrevPage: page > 1
+      });
+    });
   });
 
   // GET-route voor de overzicht detail page van een service met slug

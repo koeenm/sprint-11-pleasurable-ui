@@ -29,6 +29,14 @@
     </li>
     <% }); %>
   </ul>
+  <div class="pagination">
+    <% if (hasPrevPage) { %>
+      <a href="/overzicht?page=<%= currentPage - 1 %>">Previous</a>
+    <% } %>
+    <% if (hasNextPage) { %>
+      <a href="/overzicht?page=<%= currentPage + 1 %>">Next</a>
+    <% } %>
+  </div>
 </main>
 
 <!-- Hier word de foot geinclude -->
