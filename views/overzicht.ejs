@@ -9,12 +9,12 @@
 
   <div class="overzicht__search--container">
     <form id="searchForm" action="/overzicht" method="get">
-      <input type="text" name="search" placeholder="Zoeken..." value="<%= query %>">
+      <input type="text" id="searchInput" name="search" placeholder="Zoeken..." value="<%= query %>">
       <button type="submit">Search</button>
     </form>
   </div>
 
-  <ul class="overzicht__container">
+  <ul class="overzicht__container" id="servicesContainer">
     <% // Sorteren van advertenties op oud naar nieuw (Hoogste ID tot laagste ID)
     services.sort((a, b) => b.id - a.id); services.forEach(function(service) {
     %>
