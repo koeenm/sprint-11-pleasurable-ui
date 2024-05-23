@@ -62,17 +62,27 @@ fetchData().then((allAdvertisementsData) => {
     response.render("faq", { services: allAdvertisementsData });
   });
 
-  // GET-route voor de overzichtspagina met pagination
+  // GET-route voor de overzichtspagina met pagination en search functie
   app.get("/overzicht", function (request, response) {
     const page = parseInt(request.query.page) || 1;
     const limit = 6; // Aantal items per pagina
-
+    const query = request.query.search;
+    
     fetchPaginatedData(page, limit).then((paginatedData) => {
+      let filteredServices = paginatedData;
+  
+      if (query) {
+        filteredServices = paginatedData.filter(service =>
+          service.title.toLowerCase().includes(query.toLowerCase())
+        );
+      }
+  
       response.render("overzicht", {
-        services: paginatedData,
+        services: filteredServices,
         currentPage: page,
-        hasNextPage: paginatedData.length === limit,
-        hasPrevPage: page > 1
+        hasNextPage: filteredServices.length === limit,
+        hasPrevPage: page > 1,
+        query: query || ""
       });
     });
   });

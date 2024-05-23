@@ -2,9 +2,18 @@
 <%- include('./partials/head') %>
 
 <main>
+
   <div class="overzicht__button--container">
     <a href="/service-aanmelden" class="overzicht__button">Zelf iets plaatsen...</a>
   </div>
+
+  <div class="overzicht__search--container">
+    <form id="searchForm" action="/overzicht" method="get">
+      <input type="text" name="search" placeholder="Zoeken..." value="<%= query %>">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
   <ul class="overzicht__container">
     <% // Sorteren van advertenties op oud naar nieuw (Hoogste ID tot laagste ID)
     services.sort((a, b) => b.id - a.id); services.forEach(function(service) {
@@ -29,11 +38,13 @@
     </li>
     <% }); %>
   </ul>
+
   <div class="overzicht__pagination">
     <a id="prevPage" class="<%= hasPrevPage ? '' : 'disabled' %>" href="/overzicht?page=<%= currentPage - 1 %>">Vorige</a>
     <span>Pagina <%= currentPage %></span>
     <a id="nextPage" class="<%= hasNextPage ? '' : 'disabled' %>" href="/overzicht?page=<%= currentPage + 1 %>">Volgende</a>
   </div>
+
 </main>
 
 <!-- Hier word de foot geinclude -->
