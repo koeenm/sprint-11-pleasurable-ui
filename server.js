@@ -1,8 +1,8 @@
 // Importeer het npm pakket express uit de node_modules map
-import express from "express";
+import express from 'express'
 
 // Importeer de zelfgemaakte functie fetchJson uit de ./helpers map
-import fetchJson from "./helpers/fetch-json.js";
+import fetchJson from './helpers/fetch-json.js'
 
 // Importeer slugify voor leesbare URLs met slug
 import slugify from "slugify";
@@ -11,28 +11,22 @@ import slugify from "slugify";
 const baseUrl = "https://fdnd-agency.directus.app";
 
 // Maak een nieuwe express app aan
-const app = express();
+const app = express()
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Stel ejs in als template engine
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs')
 
 // Stel de map met ejs templates in
-app.set("views", "./views");
+app.set('views', './views')
 
 // Gebruik de map 'public' voor statische resources, zoals stylesheets, afbeeldingen en client-side JavaScript
-app.use(express.static("public"));
+app.use(express.static('public'))
 
 // Fetch de data van de API
 const fetchFromApi = (endpoint) => {
   return fetchJson(baseUrl + endpoint).then((response) => response.data);
-};
-
-// Fetch de data van de API van dh_services met paginering
-const fetchPaginatedData = (page = 1, limit = 6) => {
-  const offset = (page - 1) * limit;
-  return fetchFromApi(`/items/dh_services?limit=${limit}&offset=${offset}`);
 };
 
 // Fetch de data van de API van dh_services
@@ -42,6 +36,13 @@ const fetchData = () => {
 
 // Data ophalen van de API
 fetchData().then((allAdvertisementsData) => {
+
+  // Log each service title and generated slug to ensure data structure and slug generation
+  allAdvertisementsData.forEach((service) => {
+    const slug = slugify(service.title, { lower: true });
+    service.slug = slug;
+  });
+
   // GET-route voor de indexpagina
   app.get("/", function (request, response) {
     response.render("index", { services: allAdvertisementsData });
@@ -49,41 +50,60 @@ fetchData().then((allAdvertisementsData) => {
 
   // GET-route voor de contact pagina
   app.get("/contact", function (request, response) {
-    response.render("contact", { services: allAdvertisementsData });
+    response.render("contact", { services: allAdvertisementsData, });
   });
 
   // GET-route voor de over ons pagina
   app.get("/over-ons", function (request, response) {
-    response.render("over-ons", { services: allAdvertisementsData });
+    response.render("over-ons", { services: allAdvertisementsData, });
   });
 
   // GET-route voor de FAQ pagina
   app.get("/faq", function (request, response) {
-    response.render("faq", { services: allAdvertisementsData });
+    response.render("faq", { services: allAdvertisementsData, });
   });
 
-  // GET-route voor de overzichtspagina met pagination en search functie
+  // POST-route voor zoeken services
+  app.post("/search", function (request, response) {
+    const searchQuery = request.body.searchQuery.toLowerCase();
+    const filteredServices = allAdvertisementsData.filter(service =>
+      service.title.toLowerCase().includes(searchQuery)
+    );
+
+    // Render the search results using the overzicht template
+    const totalPages = 1; // Since it's not paginated
+    response.render("overzicht", {
+      services: filteredServices,
+      currentPage: 1, // Assuming it's the first page
+      totalPages: totalPages,
+      searchQuery: searchQuery // Pass the search query to template for pre-filling the search bar
+    });
+  });
+
+  // GET-route voor de overzichtspagina met pagination en search
   app.get("/overzicht", function (request, response) {
-    const page = parseInt(request.query.page) || 1;
-    const limit = 6; // Aantal items per pagina
-    const query = request.query.search;
-    
-    fetchPaginatedData(page, limit).then((paginatedData) => {
-      let filteredServices = paginatedData;
-  
-      if (query) {
-        filteredServices = paginatedData.filter(service =>
-          service.title.toLowerCase().includes(query.toLowerCase())
-        );
-      }
-  
-      response.render("overzicht", {
-        services: filteredServices,
-        currentPage: page,
-        hasNextPage: filteredServices.length === limit,
-        hasPrevPage: page > 1,
-        query: query || ""
-      });
+    const page = parseInt(request.query.page) || 1; 
+    const itemsPerPage = 6;
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const totalPages = Math.ceil(allAdvertisementsData.length / itemsPerPage);
+
+    // Filter initiatieven op basis van de query, if provided!
+    let servicesOnPage = allAdvertisementsData;
+    const searchQuery = request.query.q;
+    if (searchQuery) {
+      servicesOnPage = allAdvertisementsData.filter(service =>
+        service.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    } else {
+      servicesOnPage = allAdvertisementsData.slice(startIndex, endIndex);
+    }
+
+    response.render("overzicht", {
+      services: servicesOnPage,
+      currentPage: page,
+      totalPages: totalPages,
+      searchQuery: searchQuery
     });
   });
 
@@ -101,11 +121,6 @@ fetchData().then((allAdvertisementsData) => {
     response.render("service", { service: service });
   });
 
-  // Zorg voor een leesbare URL door de titel weer te geven in plaats van het ID
-  allAdvertisementsData.forEach((service) => {
-    service.slug = slugify(service.title, { lower: true });
-  });
-
   // GET-route voor de pagina om een service aan te melden
   app.get("/service-aanmelden", function (request, response) {
     response.render("service-aanmelden", { services: allAdvertisementsData });
@@ -113,9 +128,7 @@ fetchData().then((allAdvertisementsData) => {
 
   // GET-route voor de pagina om een service aanmelding succes weer te geven
   app.get("/service-aanmelden-gelukt", function (request, response) {
-    response.render("service-aanmelden-gelukt", {
-      services: allAdvertisementsData,
-    });
+    response.render("service-aanmelden-gelukt", { services: allAdvertisementsData });
   });
 
   // POST-route om formuliergegevens te verwerken
@@ -145,25 +158,21 @@ fetchData().then((allAdvertisementsData) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newAdvertisement),
-    })
-      .then((responseFromAPI) => {
-        console.log("Response from API:", responseFromAPI);
+    }).then((responseFromAPI) => {
+      console.log("Response from API:", responseFromAPI);
 
-        // Bijwerken van de gegevens vanuit de API
-        fetchData()
-          .then((updatedData) => {
-            allAdvertisementsData = updatedData;
-            response.redirect("/service-aanmelden-gelukt");
-          })
-          .catch((error) => {
-            console.error("Error fetching data from API:", error);
-            response.status(500).send("Internal Server Error");
-          });
-      })
-      .catch((error) => {
-        console.error("Error while posting data to API:", error);
+      // Bijwerken van de gegevens vanuit de API
+      fetchData().then((updatedData) => {
+        allAdvertisementsData = updatedData;
+        response.redirect("/service-aanmelden-gelukt");
+      }).catch((error) => {
+        console.error("Error fetching data from API:", error);
         response.status(500).send("Internal Server Error");
       });
+    }).catch((error) => {
+      console.error("Error while posting data to API:", error);
+      response.status(500).send("Internal Server Error");
+    });
   });
 
   // POST-route voor het liken van een service
@@ -173,10 +182,10 @@ fetchData().then((allAdvertisementsData) => {
     const service = allAdvertisementsData.find(
       (service) => service.id === parseInt(likeId)
     );
-    if (!service) {
+    if (!service) { 
       console.log("Service niet gevonden voor ID:", likeId);
       response.status(404).send("Service niet gevonden");
-      return;
+      return
     }
 
     // Geef aan de server door of het een like of unlike is
@@ -190,15 +199,13 @@ fetchData().then((allAdvertisementsData) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ likes: service.likes }),
-    })
-      .then(() => {
-        console.log("Aantal likes bijgewerkt voor service:", service);
-        response.status(202).send();
-      })
-      .catch((error) => {
-        console.error("Error patching likes in Directus API:", error);
-        response.status(500).send(); // TODO: send correct body
-      });
+    }).then(() => {
+      console.log("Aantal likes bijgewerkt voor service:", service);
+      response.status(202).send();
+    }).catch((error) => {
+      console.error("Error patching likes in Directus API:", error);
+      response.status(500).send(); // TODO: send correct body
+    });
   });
 
   // Poort instellen waarop Express moet luisteren
