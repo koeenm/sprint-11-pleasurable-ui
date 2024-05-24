@@ -5,8 +5,7 @@
   <div class="overzicht__button--container">
     <a href="/service-aanmelden" class="overzicht__button">Zelf iets plaatsen...</a>
   </div>
-  <input type="text" class="overzicht__zoeken" placeholder="Zoek initiatieven...  🔍">
-  <ul class="overzicht__container" id="initiatieven__lijst">
+  <ul class="overzicht__container">
     <% // Sorteren van advertenties op oud naar nieuw (Hoogste ID tot laagste ID)
     services.sort((a, b) => b.id - a.id); services.forEach(function(service) {
     %>
