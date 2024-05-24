@@ -1,0 +1,68 @@
+/* ------------- Root & Font ------------- */
+
+:root {
+  --base--white: #fff;
+  --base--grey-97: #f8f8f8;
+  --base--grey-62: #aaa;
+  --base--grey-19: #4a4a4a;
+  --base--black: #202020;
+
+  --primary--green-accent: #41bd66;
+  --secondary--green-accent: #a0d7b0;
+  --light--green-accent: #e3ebdd;
+}
+
+/* ------------- Contact ------------- */
+
+.contact__container--left {
+  width: 18em;
+  margin: 0 auto;
+}
+
+.contact__container--left h2 {
+  font-weight: normal;
+  font-size: 1.8em;
+}
+
+.contact__container--left img {
+  max-width: 100%;
+}
+
+/* ------------- Media Queries ------------- */
+
+@media screen and (min-width: 768px) {
+  .contact__container--left {
+    width: 36em;
+  }
+
+  .contact__container--left h2 {
+    font-size: 2.6em;
+  }
+
+  .contact__container--left p {
+    font-size: 1.6em;
+  }
+}
+
+@media screen and (min-width: 1099px) {
+  .contact__container--left {
+    width: 57em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 6em;
+  }
+
+  .contact__container--left img {
+    width: 26em;
+  }
+}
+
+@media screen and (min-width: 1599px) {
+
+}
+
+@media screen and (min-width: 1799px) {
+
+}
