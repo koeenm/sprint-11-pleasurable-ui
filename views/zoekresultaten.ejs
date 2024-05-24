@@ -1,0 +1,23 @@
+<!-- Hier word de header geinclude -->
+<%- include('./partials/head') %>
+
+  <h1>Zoekresultaten</h1>
+  <ul>
+    <% results.forEach(result => { %>
+        <li class="overzicht__service">
+            <div class="loading"></div>
+            <a href="/service/<%= result.slug %>">
+              <img loading="lazy" src="<%= result.image ? 'https://fdnd-agency.directus.app/assets/' + result.image : '/assets/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg' %>" alt="Image">
+              <section class="overzicht__service--tekst">
+                <h2><%= result.title %></h2>
+                <p><%= result.short_description %></p>
+              </section>
+            </a>
+          </li>
+    <% }) %>
+  </ul>
+  <a href="/overzicht">Terug naar zoekpagina</a>
+
+
+<!-- Hier word de foot geinclude -->
+<%- include('./partials/foot') %>

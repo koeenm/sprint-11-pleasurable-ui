@@ -152,6 +152,21 @@ fetchData().then((allAdvertisementsData) => {
     }
   });
 
+ // POST-route voor zoekfunctie
+app.post('/search', async (req, res) => {
+  const query = req.body.query.toLowerCase();
+  try {
+    const response = await fetchJson(`${baseUrl}/items/dh_services?filter[title][_icontains]=${query}`);
+    const searchResults = response.data;
+    res.render('zoekresultaten', { results: searchResults });
+  } catch (error) {
+    console.error('Error retrieving data:', error);
+    res.status(500).send('Error retrieving data');
+  }
+});
+
+
+
   // Poort instellen waarop Express moet luisteren
   app.set("port", process.env.PORT || 8000);
 
