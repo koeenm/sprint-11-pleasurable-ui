@@ -14,16 +14,43 @@
 
 /* ------------- About ------------- */
 
+.about__article {
+  margin: 0 auto;
+  padding: 2em;
+  display: flex;
+  flex-direction: column-reverse;
+}
 
+.about__article:last-of-type {
+  margin-bottom: 2em;
+}
+
+.about__article img {
+  width: 100%;
+}
 
 /* ------------- Media Queries ------------- */
 
 @media screen and (min-width: 768px) {
+  .about__article {
+    flex-direction: row-reverse;
+  }
 
+  .about__article img {
+    width: 20em;
+    margin-right: 2em;
+  }
 }
 
 @media screen and (min-width: 1099px) {
+  .about__article {
+    padding: 2em 14em;
+  }
 
+  .about__article img {
+    width: 22em;
+    margin-right: 4em;
+  }
 }
 
 @media screen and (min-width: 1599px) {
@@ -31,5 +58,21 @@
 }
 
 @media screen and (min-width: 1799px) {
+  .about__article {
+    padding: 2em 26em;
+  }
+  
+  .about__article:nth-of-type(2) {
+    flex-direction: row;
+  }
 
+  .about__article:nth-of-type(2) img {
+    margin-left: 4em;
+    margin-right: 0;
+  }
+
+  .about__article img {
+    width: 22em;
+    margin-right: 4em;
+  }
 }
