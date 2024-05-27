@@ -1,27 +1,35 @@
-<!-- Hier word de header geinclude -->
+<!-- Include partial head -->
 <%- include('./partials/head') %>
 
 <main>
-
   <div class="overzicht__navigation">
     <div class="overzicht__button--container">
       <a href="/service-aanmelden" class="overzicht__button">Zelf iets plaatsen...</a>
     </div>
-  
+
     <div class="overzicht__search">
       <form action="/search" method="POST">
-        <input type="text" name="searchQuery" placeholder="Zoeken..." />
+        <input type="text" name="searchQuery" placeholder="Zoeken..." value="<%= searchQuery || '' %>" />
         <button type="submit" class="overzicht__search--button">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#202020"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#202020">
+            <path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+          </svg>
         </button>
       </form>
     </div>
   </div>
 
+  <% if (noResultsMessage) { %>
+  <div class="no-results">
+    <h2>Oeps, geen resultaat gevonden!</h2>
+    <p>Probeer het opnieuw of zoek op iets anders.</p>
+    <img src="/assets/notfound.svg" alt="No Results Found" class="no-results__image" />
+  </div>
+  <% } else { %>
   <ul class="overzicht__container">
     <% // Sorteren van advertenties op oud naar nieuw (Hoogste ID tot laagste ID)
-    services.sort((a, b) => b.id - a.id); services.forEach(function(service) {
-    %>
+    services.sort((a, b) => b.id - a.id);
+    services.forEach(function(service) { %>
     <li class="overzicht__service fade-in">
       <div class="loading"></div>
       <a href="/service/<%= service.slug %>">
@@ -33,7 +41,7 @@
             <span><%= service.likes %></span>
           </label>
         </form>
-        <img src="https://fdnd-agency.directus.app/assets/<%= service.image %>"/>
+        <img src="https://fdnd-agency.directus.app/assets/<%= service.image %>" />
         <section class="overzicht__service--tekst">
           <h2><%= service.title %></h2>
           <p><%= service.short_description %></p>
@@ -45,27 +53,24 @@
 
   <div class="overzicht__pagination">
     <!-- Previous link -->
-    <a href="/overzicht?page=<%= currentPage - 1 %>"
-       class="pagination__link <%= currentPage === 1 ? 'disabled' : '' %>">
+    <a href="/overzicht?page=<%= currentPage - 1 %>" class="pagination__link <%= currentPage === 1 ? 'disabled' : '' %>">
       Vorige
     </a>
-    
+
     <!-- Page numbers -->
     <% for (let i = 1; i <= totalPages; i++) { %>
-      <a href="/overzicht?page=<%= i %>"
-         class="pagination__link pagination__number <%= currentPage === i ? 'pagination__current' : '' %>">
-        <%= i %>
-      </a>
+    <a href="/overzicht?page=<%= i %>" class="pagination__link pagination__number <%= currentPage === i ? 'pagination__current' : '' %>">
+      <%= i %>
+    </a>
     <% } %>
-    
+
     <!-- Next link -->
-    <a href="/overzicht?page=<%= currentPage + 1 %>"
-       class="pagination__link <%= currentPage === totalPages ? 'disabled' : '' %>">
+    <a href="/overzicht?page=<%= currentPage + 1 %>" class="pagination__link <%= currentPage === totalPages ? 'disabled' : '' %>">
       Volgende
     </a>
   </div>
-
+  <% } %>
 </main>
 
-<!-- Hier word de foot geinclude -->
+<!-- Include partial foot -->
 <%- include('./partials/foot') %>

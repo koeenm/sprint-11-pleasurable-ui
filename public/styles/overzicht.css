@@ -99,6 +99,26 @@
   fill: var(--base--black);
 }
 
+.no-results {
+  text-align: center;
+  margin: 6em auto;
+}
+
+.no-results h2 {
+  font-size: 1.8em;
+  color: var(--primary--green-accent);
+}
+
+.no-results p {
+  font-size: 1.2em
+}
+
+.no-results__image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 1em;
+}
+
 .overzicht__like--form {
   display: none;
 }
@@ -288,7 +308,13 @@
 }
 
 @media screen and (min-width: 1599px) {
-
+  .no-results h2 {
+    font-size: 2em;
+  }
+  
+  .no-results p {
+    font-size: 1.4em
+  }
 }
 
 @media screen and (min-width: 1799px) {
