@@ -32,6 +32,11 @@
   border: 2px solid var(--base--grey-97);
   background-color: var(--base--white);
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  transition: transform 0.15s ease-in-out;
+}
+
+.overzicht__service:hover {
+  transform: scale(1.05);
 }
 
 .overzicht__service img {
