@@ -7,8 +7,11 @@
   </div>
   <form action="/search" method="POST">
     <input type="text" name="query" placeholder="Voer zoekterm in">
-    <button type="submit">Zoeken</button>
   </form>
+
+  <div class="zoekresultaten__container"></div>
+
+  <h1 class="overzicht__title">Initiatieven</h1>
   <ul class="overzicht__container">
     <% // Sorteren van advertenties op oud naar nieuw (Hoogste ID tot laagste ID)
     services.sort((a, b) => b.id - a.id); services.forEach(function(service) {

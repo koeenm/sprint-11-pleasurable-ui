@@ -61,3 +61,64 @@ document.addEventListener("DOMContentLoaded", function () {
     likeForm.style.display = "block";
   });
 });
+
+//client-side voor zoekfunctie
+
+// Wacht tot de volledige DOM is geladen
+document.addEventListener('DOMContentLoaded', () => {
+  // Zoek het zoekformulier en het invoerveld
+  const searchForm = document.querySelector('form[action="/search"]');
+  const searchInput = searchForm.querySelector('input[name="query"]');
+  // Zoek het element waar de zoekresultaten worden weergegeven
+  const resultsContainer = document.querySelector('.zoekresultaten__container');
+
+  // Voeg een event listener toe voor het versturen van het zoekformulier
+  searchForm.addEventListener('submit', async (event) => {
+    // Voorkom dat het formulier de pagina opnieuw laadt
+    event.preventDefault();
+    // Haal de waarde van het zoekveld op
+    const query = searchInput.value.trim();
+    
+    // Stop als het zoekveld leeg is
+    if (!query) return;
+
+    try {
+      // Verstuur een POST-verzoek naar de server met de zoekopdracht
+      const response = await fetch('/search', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({ query }) // Zet de zoekopdracht om naar JSON
+      });
+
+      // Controleer of het verzoek succesvol was
+      if (!response.ok) throw new Error('Network response was not ok');
+
+      // Haal de zoekresultaten op uit de response
+      const results = await response.json();
+
+      // Update de inhoud van het zoekresultaten element
+      resultsContainer.innerHTML = `
+      <h1 class="overzicht__title">Zoekresultaten</h1>
+      <ul class="zoekresultaten__container overzicht__container">
+        ${results.map(service => `
+          <li class="overzicht__service">
+            <a href="/service/${service.slug}">
+              <img loading="lazy" src="${service.image ? 'https://fdnd-agency.directus.app/assets/' + service.image : '/assets/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg'}" alt="Image">
+              <section class="overzicht__service--tekst">
+                <h2>${service.title}</h2>
+                <p>${service.short_description}</p>
+              </section>
+            </a>
+          </li>
+        `).join('')}
+      </ul>
+    `;
+  } catch (error) {
+    console.error('Error:', error);
+  }
+});
+});
+

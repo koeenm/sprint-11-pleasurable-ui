@@ -35,6 +35,11 @@
   transition: transform 0.15s ease-in-out;
 }
 
+.overzicht__title {
+  display: flex;
+  justify-content: center;
+}
+
 .overzicht__service:hover {
   transform: scale(1.05);
 }
@@ -133,6 +138,17 @@
   width: 40px;
   color: var(--base--black);
 }
+
+.zoekresultaten__container {
+  margin-bottom: 20px;
+}
+
+.zoekresultaten__container .overzicht__service {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
 
 /* -------------- Media Queries -------------- */
 

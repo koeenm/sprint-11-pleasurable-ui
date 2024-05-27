@@ -24,9 +24,15 @@ app.set('views', './views')
 // Gebruik de map 'public' voor statische resources, zoals stylesheets, afbeeldingen en client-side JavaScript
 app.use(express.static('public'))
 
-// Fetch de data van de API
+// Functie om data van de API op te halen en slugs toe te voegen
 const fetchFromApi = (endpoint) => {
-  return fetchJson(baseUrl + endpoint).then((response) => response.data);
+  return fetchJson(baseUrl + endpoint).then((response) => {
+    const data = response.data;
+    data.forEach(item => {
+      item.slug = slugify(item.title, { lower: true });
+    });
+    return data;
+  });
 };
 
 // Fetch de data van de API van dh_services
@@ -44,7 +50,7 @@ fetchData().then((allAdvertisementsData) => {
 
   // GET-route voor de FAQ pagina
   app.get("/faq", function (request, response) {
-    response.render("faq", { services: allAdvertisementsData, });
+    response.render("faq", { services: allAdvertisementsData });
   });
 
   // GET-route voor de overzichtspagina
@@ -152,20 +158,29 @@ fetchData().then((allAdvertisementsData) => {
     }
   });
 
- // POST-route voor zoekfunctie
-app.post('/search', async (req, res) => {
-  const query = req.body.query.toLowerCase();
-  try {
-    const response = await fetchJson(`${baseUrl}/items/dh_services?filter[title][_icontains]=${query}`);
-    const searchResults = response.data;
-    res.render('zoekresultaten', { results: searchResults });
-  } catch (error) {
-    console.error('Error retrieving data:', error);
-    res.status(500).send('Error retrieving data');
-  }
-});
+  // POST-route voor zoekfunctie
+  app.post('/search', async (req, res) => {
+    const query = req.body.query.toLowerCase();
+    try {
+      const response = await fetchJson(`${baseUrl}/items/dh_services?filter[title][_icontains]=${query}`);
+      const searchResults = response.data;
 
+      // Voeg slugs toe aan de zoekresultaten
+      searchResults.forEach((service) => {
+        service.slug = slugify(service.title, { lower: true });
+      });
 
+      // Controleer of het een AJAX request is
+      if (req.xhr) {
+        res.json(searchResults);
+      } else {
+        res.render('zoekresultaten', { results: searchResults });
+      }
+    } catch (error) {
+      console.error('Error retrieving data:', error);
+      res.status(500).send('Error retrieving data');
+    }
+  });
 
   // Poort instellen waarop Express moet luisteren
   app.set("port", process.env.PORT || 8000);
