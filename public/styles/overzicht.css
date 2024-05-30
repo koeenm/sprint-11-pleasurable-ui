@@ -20,6 +20,7 @@
   justify-content: center;
   align-items: center;
   max-width: 80em;
+  gap: 40px;
   margin: 0 auto;
 }
 
@@ -33,6 +34,7 @@
   background-color: var(--base--white);
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   transition: transform 0.15s ease-in-out;
+  
 }
 
 .overzicht__title {
@@ -139,20 +141,31 @@
   color: var(--base--black);
 }
 
-.zoekresultaten__container {
-  margin-bottom: 20px;
+.zoekresultaat__titel {
+  display: flex;
+  justify-content: center;
 }
 
-.zoekresultaten__container .overzicht__service {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
+.zoekresultaten__container .overzicht__container{
+  margin-bottom: 20px;
+  justify-content: left;
+  border-bottom: solid 4px var(--primary--green-accent);
+  padding-bottom: 2em;
 }
+
+/* .zoekresultaten__container .overzicht__service {
+  margin-bottom: 10px;
+  width: 18em;
+} */
 
 
 /* -------------- Media Queries -------------- */
 
 @media screen and (min-width: 768px) {
+
+  .overzicht__container {
+    gap: 0;
+  }
   .overzicht__service {
     margin: 2em;
   }

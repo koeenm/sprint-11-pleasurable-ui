@@ -1,8 +1,9 @@
 <!-- Hier word de header geinclude -->
-<%- include('./partials/head') %>
+<!-- <%- include('./partials/head') %> -->
 
-<ul id="zoekresultaten-list overzicht__container">
-  <h1>zoekresultaten</h1>
+<h1 class="zoekresultaat__titel">zoekresultaten</h1>
+<!-- <ul class="zoekresultaten-list overzicht__container">
+  
   <% results.forEach(function(service) { %>
     <li class="overzicht__service">
       <a href="/service/<%= service.slug %>">
@@ -14,7 +15,28 @@
       </a>
     </li>
   <% }); %>
+</ul> -->
+<ul class="zoekresultaten-list overzicht__container">
+  <% results.forEach(function(service) { %>
+  <li class="overzicht__service">
+    <div class="loading"></div>
+    <a href="/service/<%= service.slug %>">
+      <form action="/like" method="POST" class="overzicht__like--form">
+        <label class="heart-checkbox" for="<%= service.id %>-like">
+          <input type="checkbox" name="like" id="<%= service.id %>-like" value="<%= service.id %>" />
+          <i class="fas fa-heart"></i>
+          <span><%= service.likes %></span>
+        </label>
+      </form>
+      <img loading="lazy" src="<%= service.image ? 'https://fdnd-agency.directus.app/assets/' + service.image : '/assets/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg' %>" alt="Image">
+      <section class="overzicht__service--tekst">
+        <h2><%= service.title %></h2>
+        <p><%= service.short_description %></p>
+      </section>
+    </a>
+  </li>
+  <% }); %>
 </ul>
 
 <!-- Hier word de foot geinclude -->
-<%- include('./partials/foot') %>
+<!-- <%- include('./partials/foot') %> -->
